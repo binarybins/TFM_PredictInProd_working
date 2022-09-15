@@ -1,0 +1,17 @@
+MANIFEST.in
+requirements.txt
+setup.py
+TaxiFareModel/__init__.py
+TaxiFareModel/data.py
+TaxiFareModel/encoders.py
+TaxiFareModel/gcp.py
+TaxiFareModel/params.py
+TaxiFareModel/trainer.py
+TaxiFareModel/utils.py
+TaxiFareModel.egg-info/PKG-INFO
+TaxiFareModel.egg-info/SOURCES.txt
+TaxiFareModel.egg-info/dependency_links.txt
+TaxiFareModel.egg-info/requires.txt
+TaxiFareModel.egg-info/top_level.txt
+api/__init__.py
+api/fast.py
