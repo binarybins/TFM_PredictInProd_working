@@ -22,12 +22,10 @@ google-cloud-storage
 termcolor
 uvicorn
 fastapi
+matplotlib
+python-multipart
 
 # utilities
-six>=1.14
-joblib
-memoized-property
-termcolor
 opencv-python==4.6.0.66
 patchify
 Pillow
