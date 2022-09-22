@@ -10,14 +10,14 @@ from PIL import Image
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler()
 
-from keras.models import load_model
-model_trained = "models/satellite_standard_unet_100epochs_8Sep2022.hdf5"
-model_path = os.path.join(os.path.dirname(os.path.dirname(__file__)),
-                            model_trained)
-model = load_model(model_path, compile=False)
+# from keras.models import load_model
+# model_trained = "models/satellite_standard_unet_100epochs_8Sep2022.hdf5"
+# model_path = os.path.join(os.path.dirname(os.path.dirname(__file__)),
+#                             model_trained)
+# model = load_model(model_path, compile=False)
 # model = load_model("../models/satellite_standard_unet_100epochs_8Sep2022.hdf5", compile=False)
 
-def segment(image):
+def segment(image, model):
     # img = cv2.imread("../raw_data/single_image/sg_random.jpg", 1)
     img = cv2.imread(image, 1)
 
