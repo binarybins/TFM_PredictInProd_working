@@ -25,6 +25,8 @@ from fastapi.responses import Response, FileResponse
 from api.segmantation_patched import segment
 import matplotlib.pyplot as plt
 import os
+import segmentation_models as sm
+from api import jasper_predict
 
 ###Loading models###
 from keras.models import load_model
@@ -35,6 +37,10 @@ model_path2 = os.path.join(os.path.dirname(os.path.dirname(__file__)),model_trai
 
 model1 = load_model(model_path1, compile=False)
 model2 = load_model(model_path2, compile=False)
+model3 = load_model("models/spacenet_gt_model_filtered_model_10_epoch.hdf5",
+                        compile=False,
+                        custom_objects={"focal_loss_plus_jaccard_loss": sm.losses.categorical_focal_jaccard_loss,
+                                    "iou_score": sm.metrics.iou_score})
 
 
 app = FastAPI()
@@ -59,9 +65,20 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     unpatched_prediction2 = segment(f'{IMAGEDIR}{file.filename}',model2)
     image_path2 = f'{IMAGEDIR}t2_{file.filename}'
-    plt.imshow(unpatched_prediction2, cmap="gray")
+    plt.imshow(unpatched_prediction2, cmap="gray_r")
     plt.axis('off')
     plt.savefig(image_path2)
+
+    sm.set_framework('tf.keras')
+    sm.framework()
+
+
+    unpatched_prediction3 = jasper_predict.predict(f'{IMAGEDIR}{file.filename}',model3)
+    image_path3 = f'{IMAGEDIR}t3_{file.filename}'
+    plt.imshow(unpatched_prediction3, cmap="gray")
+    plt.axis('off')
+    plt.savefig(image_path3)
+
 
     return {"message": f"Successfully uploaded {file.filename}"}
 
