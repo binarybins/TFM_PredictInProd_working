@@ -59,7 +59,7 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     unpatched_prediction2 = segment(f'{IMAGEDIR}{file.filename}',model2)
     image_path2 = f'{IMAGEDIR}t2_{file.filename}'
-    plt.imshow(unpatched_prediction2, cmap="gray")
+    plt.imshow(unpatched_prediction2, cmap="gray_r")
     plt.axis('off')
     plt.savefig(image_path2)
 
